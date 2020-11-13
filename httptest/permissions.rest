@@ -1,0 +1,21 @@
+POST http://localhost:3000/permissions/check HTTP/1.1
+x-cs-version: v1
+x-cs-tenant: tenant1
+x-cs-user: paula
+
+{
+    "items": [
+        {
+            "domain": "*",
+            "type": "user",
+            "id": "*",
+            "action": "read"
+        },
+        {
+            "domain": "1234",
+            "type": "project",
+            "id": "100",
+            "action": "read"
+        }
+    ]
+}

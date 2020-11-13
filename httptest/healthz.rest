@@ -1,0 +1,15 @@
+OPTIONS http://localhost:3000/healthz HTTP/1.1
+
+###
+
+GET http://localhost:3000/healthz HTTP/1.1
+x-cs-version: v1
+x-cs-tenant: 1234
+x-cs-user: user1
+
+###
+GET http://localhost:3000/metrics HTTP/1.1
+x-cs-version: v1
+x-cs-tenant: 1234
+x-cs-user: user1
+

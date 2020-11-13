@@ -1,0 +1,43 @@
+# Global root members can do anything, within all tenants...
+p, role::global::root, */*, *, *, *
+g, group::global::root, role::global::root, */*
+g, adam, group::global::root, */*
+
+# Members of tenant-admin group can do anything, within ONE specific tenant...
+p, role::tenant::admin, tenant1/*, *, *, *
+
+# Members of tenant-user group can read tenant information, users and groups...
+p, role::tenant::user, tenant1/*, user, *, read
+p, role::tenant::user, tenant1/*, group, *, read
+p, role::tenant::user, tenant1/*, tenant, *, read
+
+g, group::tenant::admins, role::tenant::admin, tenant1/*
+g, group::tenant::users, role::tenant::user, tenant1/*
+
+g, chris, group::tenant::users, tenant1/*
+g, chris, group::tenant::admins, tenant1/*
+
+# Hugo user in tenant, but admin in customer
+p, role::customer::admin, tenant1/1234, *, *, *
+p, role::customer::user, tenant1/1234, *, *, read
+
+g, group::customer::admins, role::customer::admin, tenant1/1234
+g, group::customer::users, role::customer::user, tenant1/1234
+
+g, hugo, group::tenant::users, tenant1/*
+g, hugo, group::customer::admins, tenant1/1234
+
+# Frieda user in tenant, but admin in other customer
+p, role::customer::admin, tenant1/7654, *, *, *
+p, role::customer::user, tenant1/7654, *, *, read
+
+g, group::customer::admins, role::customer::admin, tenant1/7654
+g, group::customer::users, role::customer::user, tenant1/7654
+
+g, frieda, group::tenant::users, tenant1/*
+g, frieda, group::customer::admins, tenant1/7654
+
+# Paula - user in both customers and tenant
+g, paula, group::tenant::users, tenant1/*
+g, paula, group::customer::users, tenant1/7654
+g, paula, group::customer::users, tenant1/1234

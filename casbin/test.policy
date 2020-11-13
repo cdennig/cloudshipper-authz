@@ -1,0 +1,31 @@
+# Access as admin to OWN tenant -- all TRUE
+hans, tenant1/0, user, 1, read
+hans, tenant1/1234, project, 100, read
+# Access as admin to OTHER tenant -- all FALSE
+hans, tenant99/0, user, 1, read
+hans, tenant99/9876, project, 999, read
+# User in tenant, admin in customer 1234 -- all TRUE
+hugo, tenant1/0, user, 1, read
+hugo, tenant1/1234, project, 100, read
+# User in tenant, admin in customer 1234
+frieda, tenant1/0, user, 1, read
+frieda, tenant1/7654, project, 100, read
+# next must be FALSE --> access other customer
+frieda, tenant1/1234, project, 100, read
+# Paula - user in 1234 + 7654. And tenant user -- all TRUE
+paula, tenant1/0, user, 1, read
+paula, tenant1/1234, project, 100, read
+paula, tenant1/7654, project, 100, read
+# Paula is user --> must be FALSE
+paula, tenant1/1234, project, 100, write
+paula, tenant1/7654, project, 100, write
+# different tenant --> must be FALSE
+paula, tenant99/1234, project, 100, read
+paula, tenant99/7654, project, 100, read
+# Adam - root user - everything allowed
+adam, tenant1/0, user, 100, write
+adam, tenant2/0, user, 100, write
+# Check if hans can read all customers in tenant - must be TRUE
+hans, tenant1/*, customer, *, read
+# Check if paula can read all customers in tenant - must be FALSE
+paula, tenant1/*, customer, *, read
