@@ -15,5 +15,7 @@ func RegisterHandlers(enforcer *casbin.CachedEnforcer, app *iris.Application) {
 		permissionAPI.Use(mid.APIContext())
 		permissionAPI.Use(mid.APIVersion())
 		permissionAPI.Post("/check", permissionHandler.Check)
+		permissionAPI.Get("/implicit", permissionHandler.Implicit)
+		permissionAPI.Get("/assignments", permissionHandler.Assignment)
 	}
 }

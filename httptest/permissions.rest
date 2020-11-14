@@ -19,3 +19,17 @@ x-cs-user: paula
         }
     ]
 }
+
+###
+
+GET http://localhost:3000/permissions/implicit?domain=* HTTP/1.1
+x-cs-version: v1
+x-cs-tenant: tenant1
+x-cs-user: paula
+
+###
+
+GET http://localhost:3000/permissions/assignments?domain=* HTTP/1.1
+x-cs-version: v1
+x-cs-tenant: tenant1
+x-cs-user: paula
