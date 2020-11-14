@@ -14,4 +14,5 @@ require (
 	github.com/kataras/iris/v12 v12.2.0-alpha.0.20201107104914-7b6a8f1e2646
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/prometheus/client_golang v1.2.1
+	github.com/spacycoder/cosmos-casbin-adapter v0.2.0
 )

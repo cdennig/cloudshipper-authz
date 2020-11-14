@@ -1,7 +1,7 @@
 POST http://localhost:3000/permissions/check HTTP/1.1
 x-cs-version: v1
-x-cs-tenant: tenant1
-x-cs-user: paula
+x-cs-tenant: f737c736-b3d3-4eb0-bbf8-d368338bc72c
+x-cs-user: 	712141d1-9bf4-42fc-ad1a-436a6f0c7d99
 
 {
     "items": [
@@ -24,12 +24,12 @@ x-cs-user: paula
 
 GET http://localhost:3000/permissions/implicit?domain=* HTTP/1.1
 x-cs-version: v1
-x-cs-tenant: tenant1
-x-cs-user: paula
+x-cs-tenant: f737c736-b3d3-4eb0-bbf8-d368338bc72c
+x-cs-user: 	712141d1-9bf4-42fc-ad1a-436a6f0c7d99
 
 ###
 
 GET http://localhost:3000/permissions/assignments?domain=* HTTP/1.1
 x-cs-version: v1
-x-cs-tenant: tenant1
-x-cs-user: paula
+x-cs-tenant: f737c736-b3d3-4eb0-bbf8-d368338bc72c
+x-cs-user: 	712141d1-9bf4-42fc-ad1a-436a6f0c7d99

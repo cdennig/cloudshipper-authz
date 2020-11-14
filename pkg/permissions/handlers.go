@@ -1,6 +1,8 @@
 package permissions
 
 import (
+	"log"
+
 	"github.com/casbin/casbin/v2"
 	"github.com/cdennig/cloudshipper-authz/internal/validation"
 	"github.com/go-playground/validator/v10"
@@ -19,7 +21,8 @@ func NewPermissionHandler(enforcer *casbin.CachedEnforcer) *PermissionHandler {
 func (p *PermissionHandler) Check(ctx iris.Context) {
 	tenant := ctx.Values().GetString("csTenant")
 	user := ctx.Values().GetString("csUser")
-
+	log.Println(tenant)
+	log.Println(user)
 	var itemsToCheck CheckPermissionsDTO
 	err := ctx.ReadJSON(&itemsToCheck)
 	if err != nil {

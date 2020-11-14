@@ -33,6 +33,7 @@ github.com/beorn7/perks v1.0.1 h1:VlbKKnNfV8bJzeqoa4cOKqO6bYr3WgKZxO8Z16+hsOM=
 github.com/beorn7/perks v1.0.1/go.mod h1:G2ZrVWU2WbWT9wwq4/hrbKbnv/1ERSJQ0ibhJ6rlkpw=
 github.com/casbin/casbin v1.9.1 h1:ucjbS5zTrmSLtH4XogqOG920Poe6QatdXtz1FEbApeM=
 github.com/casbin/casbin v1.9.1/go.mod h1:z8uPsfBJGUsnkagrt3G8QvjgTKFMBJ32UP8HpZllfog=
+github.com/casbin/casbin/v2 v2.8.1/go.mod h1:XXtYGrs/0zlOsJMeRteEdVi/FsB0ph7KgNfjoCoJUD8=
 github.com/casbin/casbin/v2 v2.16.0 h1:VMppcatpiqlzpRHWVFD1k3T/zZaA+0kFWnrugm3xwz0=
 github.com/casbin/casbin/v2 v2.16.0/go.mod h1:XXtYGrs/0zlOsJMeRteEdVi/FsB0ph7KgNfjoCoJUD8=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
@@ -114,6 +115,7 @@ github.com/google/go-cmp v0.5.1/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/
 github.com/google/go-cmp v0.5.2/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
 github.com/google/go-querystring v1.0.0/go.mod h1:odCYkC5MyYFN7vkCjXpyrEuKhc/BUO6wN/zVPAxq5ck=
 github.com/google/gofuzz v1.0.0/go.mod h1:dBl0BpW6vV/+mYPU4Po3pmUjxk6FQPldtuIdl/M65Eg=
+github.com/google/uuid v1.1.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/google/uuid v1.1.2-0.20200519141726-cb32006e483f/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/google/uuid v1.1.2 h1:EVhdT+1Kseyi1/pUmXKaFxYsDNy9RQYkMWRH68J/W7Y=
 github.com/google/uuid v1.1.2/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
@@ -196,6 +198,8 @@ github.com/microcosm-cc/bluemonday v1.0.4 h1:p0L+CTpo/PLFdkoPcJemLXG+fpMD7pYOoDE
 github.com/microcosm-cc/bluemonday v1.0.4/go.mod h1:8iwZnFn2CDDNZ0r6UXhF4xawGvzaqzCRa1n3/lO3W2w=
 github.com/mitchellh/go-homedir v1.1.0/go.mod h1:SfyaCUpYCn1Vlf4IUYiD9fPX4A5wJrkLzIz1N1q0pr0=
 github.com/mitchellh/mapstructure v1.1.2/go.mod h1:FVVH3fgwuzCH5S8UJGiWEs2h04kUh9fWfEaFds41c1Y=
+github.com/mmcloughlin/meow v0.0.0-20200201185800-3501c7c05d21 h1:2BIiU0QuELctVxpl6FKAsf68ZZvI89I9c8Kt8Guxba8=
+github.com/mmcloughlin/meow v0.0.0-20200201185800-3501c7c05d21/go.mod h1:uxCZJI8Z1PD2WRnSJtVJGHCyxC5qWhz5lOsx3Bx1NXo=
 github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421 h1:ZqeYNhU3OHLH3mGKHDcjJRFFRrJa6eAM5H+CtDdOsPc=
 github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421/go.mod h1:6dJC0mAP4ikYIbvyc7fijjWJddQyLn8Ig3JB5CqoB9Q=
 github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd h1:TRLaZ9cD/w8PVh93nsPXa1VrQ6jlwL5oN8l14QlcNfg=
@@ -252,6 +256,10 @@ github.com/shurcooL/sanitized_anchor_name v1.0.0 h1:PdmoCO6wvbs+7yrJyMORt4/BmY5I
 github.com/shurcooL/sanitized_anchor_name v1.0.0/go.mod h1:1NzhyTcUVG4SuEtjjoZeVRXNmyL/1OwPU0+IJeTBvfc=
 github.com/sirupsen/logrus v1.2.0/go.mod h1:LxeOpSwHxABJmUn/MG1IvRgCAasNZTLOkJPxbbu5VWo=
 github.com/sirupsen/logrus v1.4.2/go.mod h1:tLMulIdttU9McNUspp0xgXVQah82FyeX6MwdIuYE2rE=
+github.com/spacycoder/cosmos-casbin-adapter v0.2.0 h1:3Yrx57zJDaMYG2yLIShcTHs9jLs4D6Gr6A59Jjy5Kzw=
+github.com/spacycoder/cosmos-casbin-adapter v0.2.0/go.mod h1:0lftW/FAr8vRy9BFMU3/hsbFXQg4ldrGbdowm0wZd3o=
+github.com/spacycoder/cosmosdb-go-sdk v0.1.0 h1:AFWYOcCvCBFe9mO04fE+Yqcq0TCf6Dx6K5G8NBMw4IM=
+github.com/spacycoder/cosmosdb-go-sdk v0.1.0/go.mod h1:eW/wmGR3jL8QMUl6tf51DLeSAy7o15NkZ84GMCcxxvs=
 github.com/spaolacci/murmur3 v0.0.0-20180118202830-f09979ecbc72/go.mod h1:JwIasOWyU6f++ZhiEuf87xNszmSA2myDM2Kzu9HwQUA=
 github.com/spaolacci/murmur3 v1.1.0/go.mod h1:JwIasOWyU6f++ZhiEuf87xNszmSA2myDM2Kzu9HwQUA=
 github.com/spf13/afero v1.1.2/go.mod h1:j4pytiNVoe2o6bmDsKpLACNPDBIoEAkihy7loJ1B0CQ=
