@@ -1,25 +1,24 @@
 package mid
 
 import (
-	"net/http"
-
 	apicontext "github.com/cdennig/cloudshipper-authz/pkg/context"
-	"github.com/kataras/iris/v12"
+	"github.com/gin-gonic/gin"
 )
 
 // APIContext - middleware for API context (from header values)
-func APIContext() iris.Handler {
-	return func(ctx iris.Context) {
+func APIContext() gin.HandlerFunc {
+	return func(c *gin.Context) {
 
 		var apiCtx apicontext.APIContext
-		if err := ctx.ReadHeaders(&apiCtx); err != nil {
-			ctx.StopWithError(http.StatusBadRequest, err)
+
+		if err := c.ShouldBindHeader(&apiCtx); err != nil {
+			c.AbortWithStatusJSON(403, gin.H{"error": "Either tenant or user haven't been set."})
 			return
 		}
 		// Set shared variable between handlers
-		ctx.Values().Set("csTenant", apiCtx.Tenant)
-		ctx.Values().Set("csUser", apiCtx.User)
+		c.Set("csTenant", apiCtx.Tenant)
+		c.Set("csUser", apiCtx.User)
 
-		ctx.Next()
+		c.Next()
 	}
 }

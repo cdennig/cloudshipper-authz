@@ -73,5 +73,6 @@ func run() error {
 	//enforcer.GetRoleManager().(*defaultrolemanager.RoleManager).AddMatchingFunc("g", util.KeyMatch)
 
 	app := server.Routing(enforcer)
-	return server.Start(cfg, app)
+	server.Start(cfg, app)
+	return nil
 }

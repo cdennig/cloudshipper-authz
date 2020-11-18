@@ -7,10 +7,10 @@ type CheckPermissionsResultItemDTO struct {
 
 // CheckPermissionsItemDTO - Item to check permissions
 type CheckPermissionsItemDTO struct {
-	Domain string `json:"domain" validate:"required"`
-	Type   string `json:"type" validate:"required"`
-	ID     string `json:"id" validate:"required"`
-	Action string `json:"action" validate:"required,oneof=read write *"`
+	Domain string `json:"domain" binding:"required"`
+	Type   string `json:"type" binding:"required"`
+	ID     string `json:"id" binding:"required"`
+	Action string `json:"action" binding:"required,oneof=read write *"`
 }
 
 // CheckPermissionsResultDTO - List of result items
@@ -20,7 +20,7 @@ type CheckPermissionsResultDTO struct {
 
 // CheckPermissionsDTO - List of result items
 type CheckPermissionsDTO struct {
-	Items []CheckPermissionsItemDTO `json:"items" validate:"required,max=10,min=1,dive"`
+	Items []CheckPermissionsItemDTO `json:"items" binding:"required,max=10,min=1,dive"`
 }
 
 // ImplicitPermissionsResultDTO - result of implicit handler
@@ -31,12 +31,12 @@ type ImplicitPermissionsResultDTO struct {
 
 // ImplicitPermissionsItemDTO - query params
 type ImplicitPermissionsItemDTO struct {
-	Domain string `url:"domain" validate:"required"`
+	Domain string `url:"domain" binding:"required"`
 }
 
 // AssignmentItemDTO - query params
 type AssignmentItemDTO struct {
-	Domain string `url:"domain" validate:"required"`
+	Domain string `url:"domain" binding:"required"`
 }
 
 // AssignmentResultDTO - result of implicit handler

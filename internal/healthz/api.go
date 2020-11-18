@@ -1,18 +1,18 @@
 package healthz
 
 import (
-	"github.com/kataras/iris/v12"
+	"github.com/gin-gonic/gin"
 )
 
 // RegisterHandlers register handler for health check endpoint
-func RegisterHandlers(app *iris.Application) {
-	healthzAPI := app.Party("/healthz")
+func RegisterHandlers(router *gin.Engine) {
+	healthzAPI := router.Group("/healthz")
 	{
-		healthzAPI.Get("/", check)
+		healthzAPI.GET("/", check)
 	}
 }
 
 // Check implements endpoint for health check
-func check(ctx iris.Context) {
-	ctx.StatusCode(200)
+func check(c *gin.Context) {
+	c.Status(200)
 }

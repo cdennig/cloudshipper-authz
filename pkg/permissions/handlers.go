@@ -1,12 +1,10 @@
 package permissions
 
 import (
-	"log"
-
 	"github.com/casbin/casbin/v2"
 	"github.com/cdennig/cloudshipper-authz/internal/validation"
+	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
-	"github.com/kataras/iris/v12"
 )
 
 type PermissionHandler struct {
@@ -18,27 +16,20 @@ func NewPermissionHandler(enforcer *casbin.CachedEnforcer) *PermissionHandler {
 }
 
 // Check - check permissions
-func (p *PermissionHandler) Check(ctx iris.Context) {
-	tenant := ctx.Values().GetString("csTenant")
-	user := ctx.Values().GetString("csUser")
-	log.Println(tenant)
-	log.Println(user)
+func (p *PermissionHandler) Check(c *gin.Context) {
+	tenant := c.Keys["csTenant"].(string)
+	user := c.Keys["csUser"].(string)
 	var itemsToCheck CheckPermissionsDTO
-	err := ctx.ReadJSON(&itemsToCheck)
+	err := c.ShouldBindJSON(&itemsToCheck)
 	if err != nil {
-
 		if errs, ok := err.(validator.ValidationErrors); ok {
 			validationErrors := validation.WrapAPIValidationErrors(errs)
 
-			ctx.StopWithProblem(iris.StatusBadRequest, iris.NewProblem().
-				Title("Validation error").
-				Detail("One or more fields failed to be validated").
-				Key("errors", validationErrors))
-
+			c.AbortWithStatusJSON(400, validationErrors)
 			return
 		}
 
-		ctx.StopWithStatus(iris.StatusInternalServerError)
+		c.AbortWithError(500, err)
 		return
 	}
 
@@ -49,8 +40,7 @@ func (p *PermissionHandler) Check(ctx iris.Context) {
 		ok, err := p.enforcer.Enforce(user, domainToCheck, v.Type, v.ID, v.Action)
 
 		if err != nil {
-			ctx.StopWithProblem(iris.StatusInternalServerError, iris.NewProblem().
-				Title("Check permissions failed.").DetailErr(err))
+			c.AbortWithError(500, err)
 			return
 		}
 		if ok == true {
@@ -64,80 +54,79 @@ func (p *PermissionHandler) Check(ctx iris.Context) {
 		}
 	}
 
-	ctx.StatusCode(200)
-	ctx.JSON(result)
+	c.JSON(200, result)
 
 }
 
-// Implicit - Get implicit permissions & roles
-func (p *PermissionHandler) Implicit(ctx iris.Context) {
-	tenant := ctx.Values().GetString("csTenant")
-	user := ctx.Values().GetString("csUser")
-	var input ImplicitPermissionsItemDTO
-	err := ctx.ReadQuery(&input)
-	if err != nil {
+// // Implicit - Get implicit permissions & roles
+// func (p *PermissionHandler) Implicit(c *gin.Context) {
+// 	tenant := ctx.Values().GetString("csTenant")
+// 	user := ctx.Values().GetString("csUser")
+// 	var input ImplicitPermissionsItemDTO
+// 	err := ctx.ReadQuery(&input)
+// 	if err != nil {
 
-		if errs, ok := err.(validator.ValidationErrors); ok {
-			validationErrors := validation.WrapAPIValidationErrors(errs)
+// 		if errs, ok := err.(validator.ValidationErrors); ok {
+// 			validationErrors := validation.WrapAPIValidationErrors(errs)
 
-			ctx.StopWithProblem(iris.StatusBadRequest, iris.NewProblem().
-				Title("Validation error").
-				Detail("One or more fields failed to be validated").
-				Key("errors", validationErrors))
+// 			ctx.StopWithProblem(iris.StatusBadRequest, iris.NewProblem().
+// 				Title("Validation error").
+// 				Detail("One or more fields failed to be validated").
+// 				Key("errors", validationErrors))
 
-			return
-		}
+// 			return
+// 		}
 
-		ctx.StopWithStatus(iris.StatusInternalServerError)
-		return
-	}
+// 		ctx.StopWithStatus(iris.StatusInternalServerError)
+// 		return
+// 	}
 
-	if input.Domain == "" {
-		input.Domain = "*"
-	}
+// 	if input.Domain == "" {
+// 		input.Domain = "*"
+// 	}
 
-	var result ImplicitPermissionsResultDTO
-	impRoles, _ := p.enforcer.GetImplicitRolesForUser(user, tenant+"/"+input.Domain)
-	impPermissions, _ := p.enforcer.GetImplicitPermissionsForUser(user, tenant+"/"+input.Domain)
+// 	var result ImplicitPermissionsResultDTO
+// 	impRoles, _ := p.enforcer.GetImplicitRolesForUser(user, tenant+"/"+input.Domain)
+// 	impPermissions, _ := p.enforcer.GetImplicitPermissionsForUser(user, tenant+"/"+input.Domain)
 
-	result.ImplicitRoles = impRoles
-	result.ImplicitPermissions = impPermissions
+// 	result.ImplicitRoles = impRoles
+// 	result.ImplicitPermissions = impPermissions
 
-	ctx.StatusCode(200)
-	ctx.JSON(result)
-}
+// 	ctx.StatusCode(200)
+// 	ctx.JSON(result)
+// }
 
-// Assignment - Get assignments
-func (p *PermissionHandler) Assignment(ctx iris.Context) {
-	user := ctx.Values().GetString("csUser")
-	var input ImplicitPermissionsItemDTO
-	err := ctx.ReadQuery(&input)
-	if err != nil {
+// // Assignment - Get assignments
+// func (p *PermissionHandler) Assignment(c *gin.Context) {
+// 	user := ctx.Values().GetString("csUser")
+// 	var input ImplicitPermissionsItemDTO
+// 	err := ctx.ReadQuery(&input)
+// 	if err != nil {
 
-		if errs, ok := err.(validator.ValidationErrors); ok {
-			validationErrors := validation.WrapAPIValidationErrors(errs)
+// 		if errs, ok := err.(validator.ValidationErrors); ok {
+// 			validationErrors := validation.WrapAPIValidationErrors(errs)
 
-			ctx.StopWithProblem(iris.StatusBadRequest, iris.NewProblem().
-				Title("Validation error").
-				Detail("One or more fields failed to be validated").
-				Key("errors", validationErrors))
+// 			ctx.StopWithProblem(iris.StatusBadRequest, iris.NewProblem().
+// 				Title("Validation error").
+// 				Detail("One or more fields failed to be validated").
+// 				Key("errors", validationErrors))
 
-			return
-		}
+// 			return
+// 		}
 
-		ctx.StopWithStatus(iris.StatusInternalServerError)
-		return
-	}
+// 		ctx.StopWithStatus(iris.StatusInternalServerError)
+// 		return
+// 	}
 
-	if input.Domain == "" {
-		input.Domain = "*"
-	}
+// 	if input.Domain == "" {
+// 		input.Domain = "*"
+// 	}
 
-	var result AssignmentResultDTO
-	filteredGroupingPolicy := p.enforcer.GetFilteredGroupingPolicy(0, user)
+// 	var result AssignmentResultDTO
+// 	filteredGroupingPolicy := p.enforcer.GetFilteredGroupingPolicy(0, user)
 
-	result.Assignments = filteredGroupingPolicy
+// 	result.Assignments = filteredGroupingPolicy
 
-	ctx.StatusCode(200)
-	ctx.JSON(result)
-}
+// 	ctx.StatusCode(200)
+// 	ctx.JSON(result)
+// }

@@ -1,14 +1,12 @@
 package prom
 
 import (
-	"github.com/kataras/iris/v12"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/gin-gonic/gin"
+	ginprometheus "github.com/zsais/go-gin-prometheus"
 )
 
 // RegisterHandlers register handler for health check endpoint
-func RegisterHandlers(app *iris.Application) {
-	promAPI := app.Party("/metrics")
-	{
-		promAPI.Get("/", iris.FromStd(promhttp.Handler()))
-	}
+func RegisterHandlers(router *gin.Engine) {
+	p := ginprometheus.NewPrometheus("gin")
+	p.Use(router)
 }
